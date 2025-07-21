@@ -18,7 +18,7 @@
  "is_hidden": 0,
  "label": "Rooms",
  "links": [],
- "modified": "2025-07-15 11:47:54.775816",
+ "modified": "2025-07-21 09:19:19.460963",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Rooms",
@@ -45,7 +45,7 @@
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 4.0,
+ "sequence_id": 5.0,
  "shortcuts": [
   {
    "color": "Grey",

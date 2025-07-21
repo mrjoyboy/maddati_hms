@@ -18,7 +18,7 @@
  "is_hidden": 0,
  "label": "Hostel",
  "links": [],
- "modified": "2025-07-15 11:47:54.554148",
+ "modified": "2025-07-21 09:19:19.182441",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Hostel",
@@ -37,7 +37,7 @@
   },
   {
    "label": "Total Active Students",
-   "number_card_name": "Total Active Students"
+   "number_card_name": "Total Active Tenants"
   },
   {
    "label": "Total  Expenses",
@@ -74,7 +74,7 @@
    "role": "Hostel Admin"
   }
  ],
- "sequence_id": 2.0,
+ "sequence_id": 3.0,
  "shortcuts": [],
  "title": "Hostel"
 }

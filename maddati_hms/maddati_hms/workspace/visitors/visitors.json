@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"lKelJSfakQ\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Visitor\",\"col\":4}},{\"id\":\"h-b2HZnVbo\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active Vistor\",\"col\":4}},{\"id\":\"VWA1OS23rO\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"yML6pwKxKU\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"View All  Visitors\",\"col\":3}},{\"id\":\"4D0X3-G0-O\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Add New Visitor\",\"col\":3}},{\"id\":\"4YhBOCBqKX\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"VmnI5oFzWz\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Visitors\",\"col\":6}}]",
+ "content": "[{\"id\":\"lKelJSfakQ\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Visitor\",\"col\":4}},{\"id\":\"h-b2HZnVbo\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active Vistor\",\"col\":4}},{\"id\":\"VWA1OS23rO\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"yML6pwKxKU\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"View All  Visitors\",\"col\":3}},{\"id\":\"4D0X3-G0-O\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Add New Visitor\",\"col\":3}},{\"id\":\"4YhBOCBqKX\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"VmnI5oFzWz\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Visitors\",\"col\":6}},{\"id\":\"jZaOJclvLP\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Active Visitors\",\"col\":6}}]",
  "creation": "2025-07-06 13:47:46.407869",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "Visitors",
  "links": [],
- "modified": "2025-07-15 11:47:55.354128",
+ "modified": "2025-07-21 09:19:19.711535",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Visitors",
@@ -35,10 +35,15 @@
    "document_type": "Visitor Log",
    "label": "Recent Visitors",
    "quick_list_filter": "[]"
+  },
+  {
+   "document_type": "Visitor Log",
+   "label": "Active Visitors",
+   "quick_list_filter": "[[\"Visitor Log\",\"status\",\"=\",\"Active\",false]]"
   }
  ],
  "roles": [],
- "sequence_id": 9.0,
+ "sequence_id": 7.0,
  "shortcuts": [
   {
    "color": "Grey",
