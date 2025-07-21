@@ -1,0 +1,68 @@
+{
+ "charts": [
+  {
+   "chart_name": "Room Occupancy",
+   "label": "Room Occupancy"
+  }
+ ],
+ "content": "[{\"id\":\"PdxoI_bhSm\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Rooms\",\"col\":3}},{\"id\":\"SBRM_Xt0gO\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Available Rooms\",\"col\":3}},{\"id\":\"ol_eeCiBLe\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Occupied Beds\",\"col\":3}},{\"id\":\"9XMk3FtvDx\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Capacity (Beds)\",\"col\":3}},{\"id\":\"MpGJfB4GtI\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"WkwouAPxMU\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Total Rooms\",\"col\":3}},{\"id\":\"TsstYGO2lv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Create Room\",\"col\":3}},{\"id\":\"8_P67DHlPF\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"1Kev6ybC7x\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Room Occupancy\",\"col\":12}}]",
+ "creation": "2025-07-06 13:20:33.336178",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "table",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Rooms",
+ "links": [],
+ "modified": "2025-07-15 11:47:54.775816",
+ "modified_by": "Administrator",
+ "module": "Maddati Hms",
+ "name": "Rooms",
+ "number_cards": [
+  {
+   "label": "Total Rooms",
+   "number_card_name": "Total Rooms"
+  },
+  {
+   "label": "Total Available Rooms",
+   "number_card_name": "Total Available Rooms"
+  },
+  {
+   "label": "Total Occupied Beds",
+   "number_card_name": "Total Occupied Beds"
+  },
+  {
+   "label": "Total Capacity (Beds)",
+   "number_card_name": "Total Capacity (Beds)"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "Hostel",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 4.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Total Rooms",
+   "link_to": "Room",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "New",
+   "label": "Create Room",
+   "link_to": "Room",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Rooms"
+}

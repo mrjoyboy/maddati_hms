@@ -1,0 +1,140 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:VIS-{YY}-{MM}-{####}",
+ "creation": "2025-06-19 00:17:23.868144",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "visitor_name",
+  "related_person_type",
+  "related_person",
+  "branch",
+  "room",
+  "purpose",
+  "remarks",
+  "column_break_gcvd",
+  "id_proof",
+  "contact_number",
+  "visit_datetime",
+  "check_out",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "visit_datetime",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Check In",
+   "reqd": 1
+  },
+  {
+   "fieldname": "visitor_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Visitor Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Branch",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "contact_number",
+   "fieldtype": "Data",
+   "label": "Contact Number"
+  },
+  {
+   "fieldname": "id_proof",
+   "fieldtype": "Attach",
+   "label": "ID Proof"
+  },
+  {
+   "fieldname": "purpose",
+   "fieldtype": "Select",
+   "label": "Purpose",
+   "options": "Visit Student\nVisit Staff\nDelivery\nMaintenance\nMeeting\nOfficial Work\nGuest Lecture\nParent Visit\nVendor Visit\nSecurity Check\nInterview\nEvent/Function\nHealth/Medical\nCourier"
+  },
+  {
+   "fieldname": "check_out",
+   "fieldtype": "Datetime",
+   "label": "Check Out"
+  },
+  {
+   "fieldname": "column_break_gcvd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "room",
+   "fieldtype": "Link",
+   "label": "Room",
+   "options": "Room"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nLeft"
+  },
+  {
+   "fieldname": "related_person_type",
+   "fieldtype": "Select",
+   "label": "Related Person Type",
+   "options": "Student\nStaff\nOther"
+  },
+  {
+   "fieldname": "related_person",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "label": "Related Student / Staff",
+   "options": "related_person_type"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-24 18:00:59.525345",
+ "modified_by": "Administrator",
+ "module": "Maddati Hms",
+ "name": "Visitor Log",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hostel Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

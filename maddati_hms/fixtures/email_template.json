@@ -1,0 +1,32 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2025-07-18 12:26:03.143099",
+  "name": "Tenant Welcome Email",
+  "response": "<div class=\"ql-editor read-mode\"><p>Dear {{ doc.tenant_name }},</p><p><br></p><p>Welcome to Shinhwa Boys Hostel! Your accommodation has been confirmed.</p><p>Branch: {{ doc.branch }}</p><p>Room: {{ doc.room }}</p><p><br></p><p>We’re glad to have you!</p><p><br></p><p>Thanks,</p><p>Shinhwa Boys Hostel Team</p><p><br></p></div>",
+  "response_html": "",
+  "subject": "Welcome to Shinhwa Boys Hostel",
+  "use_html": 0
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2025-07-18 12:26:58.409707",
+  "name": "Tenant Update Email",
+  "response": "<div class=\"ql-editor read-mode\"><p>Dear {{ doc.tenant_name }},</p><p><br></p><p>Your hostel details have been updated as follows:</p><p>Branch: {{ doc.branch }}</p><p>Room: {{ doc.room }}</p><p>Status: {{ doc.status }}</p><p><br></p><p>Thank you, &nbsp;</p><p>Shinhwa Boys Hostel</p></div>",
+  "response_html": "",
+  "subject": "Your Hostel Details Have Been Updated",
+  "use_html": 0
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2025-07-18 12:27:40.504605",
+  "name": "Tenant Left Email",
+  "response": "<div class=\"ql-editor read-mode\"><p>Dear {{ doc.tenant_name }},</p><p><br></p><p>Your status has been marked as {{ doc.status }}.</p><p>We hope you had a comfortable stay.</p><p><br></p><p>Branch: {{ doc.branch }}</p><p>Room: {{ doc.room }}</p><p><br></p><p>Thank you, &nbsp;</p><p>Shinhwa Boys Hostel</p></div>",
+  "response_html": "",
+  "subject": "Thank You for Staying With Us",
+  "use_html": 0
+ }
+]

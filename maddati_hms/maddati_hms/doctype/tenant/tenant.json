@@ -1,0 +1,284 @@
+{
+ "actions": [],
+ "allow_events_in_timeline": 1,
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:{tenant_name}-{####}",
+ "creation": "2025-06-18 08:39:57.980713",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "general_information_tab",
+  "general_information_section",
+  "photo",
+  "tenant_name",
+  "customer",
+  "date_of_birth",
+  "contact_number",
+  "column_break_xnhy",
+  "email",
+  "gender",
+  "address",
+  "status",
+  "guardian_information_section",
+  "guardian_photo",
+  "guardian_name",
+  "column_break_fbyj",
+  "guardian_contact",
+  "guardian_address",
+  "admission_details_tab",
+  "general_details_section",
+  "admission_date",
+  "branch",
+  "room",
+  "column_break_ceef",
+  "admission_fee",
+  "security_deposit",
+  "monthly_fee",
+  "extra_services_fees",
+  "discount",
+  "last_invoice_date",
+  "section_break_ypqd",
+  "extra_services",
+  "accommodation_history_tab",
+  "accommodation_history"
+ ],
+ "fields": [
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Select",
+   "label": "Gender",
+   "options": "Male\nFemale"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "general_information_section",
+   "fieldtype": "Section Break",
+   "label": "Personal Information"
+  },
+  {
+   "fieldname": "column_break_xnhy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "general_information_tab",
+   "fieldtype": "Tab Break",
+   "label": "General Information"
+  },
+  {
+   "fieldname": "photo",
+   "fieldtype": "Attach Image",
+   "in_preview": 1,
+   "label": "Photo"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Data",
+   "label": "Address"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nLeft\nCancelled"
+  },
+  {
+   "fieldname": "guardian_information_section",
+   "fieldtype": "Section Break",
+   "label": "Guardian Information"
+  },
+  {
+   "fieldname": "guardian_photo",
+   "fieldtype": "Attach Image",
+   "label": "Guardian Photo"
+  },
+  {
+   "fieldname": "guardian_name",
+   "fieldtype": "Data",
+   "label": "Guardian Name"
+  },
+  {
+   "fieldname": "column_break_fbyj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "guardian_contact",
+   "fieldtype": "Data",
+   "label": "Guardian Contact"
+  },
+  {
+   "fieldname": "guardian_address",
+   "fieldtype": "Data",
+   "label": "Guardian Address"
+  },
+  {
+   "fieldname": "admission_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Admission Details",
+   "read_only": 1
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "admission_date",
+   "fieldtype": "Date",
+   "label": "Admission Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "room",
+   "fieldtype": "Link",
+   "label": "Room",
+   "options": "Room",
+   "reqd": 1
+  },
+  {
+   "fieldname": "general_details_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_ceef",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "admission_fee",
+   "fieldtype": "Currency",
+   "label": "Admission Fee"
+  },
+  {
+   "fieldname": "monthly_fee",
+   "fieldtype": "Currency",
+   "label": "Monthly Fee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "security_deposit",
+   "fieldtype": "Currency",
+   "label": "Security Deposit"
+  },
+  {
+   "fieldname": "discount",
+   "fieldtype": "Currency",
+   "label": "Discount"
+  },
+  {
+   "fieldname": "extra_services_fees",
+   "fieldtype": "Currency",
+   "label": "Extra Services Fees",
+   "read_only": 1
+  },
+  {
+   "fieldname": "extra_services",
+   "fieldtype": "Table",
+   "label": "Extra Services",
+   "options": "Tenant Extra Service"
+  },
+  {
+   "fieldname": "section_break_ypqd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "accommodation_history_tab",
+   "fieldtype": "Tab Break",
+   "label": "Accommodation History"
+  },
+  {
+   "fieldname": "accommodation_history",
+   "fieldtype": "Table",
+   "label": "Accommodation History",
+   "options": "Tenant Accommodation History"
+  },
+  {
+   "fieldname": "last_invoice_date",
+   "fieldtype": "Date",
+   "label": "Last Invoice Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "tenant_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tenant Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "contact_number",
+   "fieldtype": "Data",
+   "label": "Contact Number"
+  }
+ ],
+ "grid_page_length": 50,
+ "image_field": "photo",
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-16 19:38:01.450882",
+ "modified_by": "Administrator",
+ "module": "Maddati Hms",
+ "name": "Tenant",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hostel Admin",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "export": 1,
+   "if_owner": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Student",
+   "share": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "show_name_in_global_search": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

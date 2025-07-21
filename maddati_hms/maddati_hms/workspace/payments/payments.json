@@ -1,0 +1,56 @@
+{
+ "charts": [
+  {
+   "chart_name": "Total Revenue",
+   "label": "Total Revenue"
+  }
+ ],
+ "content": "[{\"id\":\"-UGPvB2SJt\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Revenue\",\"col\":4}},{\"id\":\"DjNs2RXGf_\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"Xt0NJYHKjn\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"View All Payments\",\"col\":3}},{\"id\":\"nKrE2GD4NN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Add Payment\",\"col\":3}},{\"id\":\"kE53ALLnmE\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"TEzg_4oVuu\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Total Revenue\",\"col\":12}}]",
+ "creation": "2025-07-06 13:44:06.878011",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "income",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Payments",
+ "links": [],
+ "modified": "2025-07-15 11:47:55.146763",
+ "modified_by": "Administrator",
+ "module": "Maddati Hms",
+ "name": "Payments",
+ "number_cards": [
+  {
+   "label": "Total Revenue",
+   "number_card_name": "Total Revenue"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "Hostel",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 7.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "View All Payments",
+   "link_to": "Payment",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "New",
+   "label": "Add Payment",
+   "link_to": "Payment",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Payments"
+}
