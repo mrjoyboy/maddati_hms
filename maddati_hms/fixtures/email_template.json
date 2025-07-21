@@ -28,5 +28,15 @@
   "response_html": "",
   "subject": "Thank You for Staying With Us",
   "use_html": 0
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2025-07-21 13:05:24.570678",
+  "name": "Auto Repeat Sales Invoice Email",
+  "response": "<div class=\"ql-editor read-mode\"><p>Dear {{ doc.customer_name }},</p><p><br></p><p>We hope this message finds you well.</p><p><br></p><p>This is to notify you that a new invoice has been generated as per your subscription with us.</p><p><br></p><p>Invoice Number: {{ doc.name }}</p><p>Posting Date: {{ doc.posting_date }}</p><p>Due Date: {{ doc.due_date or \"N/A\" }}</p><p>Total Amount: {{ doc.grand_total }} {{ doc.currency }}</p><p><br></p><p>You may log into your account to view or download the invoice. If you have any questions or concerns, feel free to contact us.</p><p><br></p><p>Thank you for your continued trust.</p><p><br></p><p>Best regards, &nbsp;</p><p>Shinwa Boys Hostel</p></div>",
+  "response_html": null,
+  "subject": "Your Invoice {{ doc.name }} for {{ doc.posting_date }}",
+  "use_html": 0
  }
 ]

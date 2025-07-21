@@ -27,16 +27,17 @@ fixtures = [
     {"dt": "Custom Field", "filters": [["name", "in", [
                 "Customer-custom_tenant",
                 "Customer-custom_company",
-                "Sales Invoice-custom_tenant"
+                "Sales Invoice-custom_tenant",
             ]]]},
     {"dt": "Email Template", "filters": [["name", "in", [
         "Tenant Welcome Email",
         "Tenant Update Email",
-        "Tenant Left Email"
+        "Tenant Left Email",
+        "Auto Repeat Sales Invoice Email"
     ]]]}
 ]
 
-
+after_install = "maddati_hms.setup.enable_auto_repeat_for_sales_invoice"
 
 
 # Includes in <head>
