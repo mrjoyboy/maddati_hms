@@ -1,10 +1,5 @@
 {
- "charts": [
-  {
-   "chart_name": "Room Occupancy",
-   "label": "Room Occupancy"
-  }
- ],
+ "charts": [],
  "content": "[{\"id\":\"xBCJPI0xwF\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Branches\",\"col\":3}},{\"id\":\"fkw3N0JNBz\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Rooms\",\"col\":3}},{\"id\":\"hOy7sCIknT\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Active Students\",\"col\":3}},{\"id\":\"Yo4CTobGHw\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Active Staffs\",\"col\":3}},{\"id\":\"ke2wsTjfnZ\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Revenue\",\"col\":3}},{\"id\":\"DwELGQRU-t\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total  Expenses\",\"col\":3}},{\"id\":\"EKWYUotVRn\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Overdue Invoices\",\"col\":3}},{\"id\":\"-g_akfktR_\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pending Invoices\",\"col\":3}},{\"id\":\"IlQ7nRos3u\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"E4kA2-y8r8\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Overdue Invoices\",\"col\":4}},{\"id\":\"7vXOWCor0M\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Room Occupancy\",\"col\":8}}]",
  "creation": "2025-07-06 13:33:24.304708",
  "custom_blocks": [],
@@ -18,54 +13,15 @@
  "is_hidden": 0,
  "label": "Hostel",
  "links": [],
- "modified": "2025-07-21 09:19:19.182441",
+ "modified": "2025-07-21 10:09:45.868390",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Hostel",
- "number_cards": [
-  {
-   "label": "Total Revenue",
-   "number_card_name": "Total Revenue"
-  },
-  {
-   "label": "Total Pending Invoices",
-   "number_card_name": "Total Pending Amount"
-  },
-  {
-   "label": "Total Branches",
-   "number_card_name": "Total Branches"
-  },
-  {
-   "label": "Total Active Students",
-   "number_card_name": "Total Active Tenants"
-  },
-  {
-   "label": "Total  Expenses",
-   "number_card_name": "Total  Expenses"
-  },
-  {
-   "label": "Total Rooms",
-   "number_card_name": "Total Rooms"
-  },
-  {
-   "label": "Total Active Staffs",
-   "number_card_name": "Total Active Staffs"
-  },
-  {
-   "label": "Total Overdue Invoices",
-   "number_card_name": "Total Overdue Invoices"
-  }
- ],
+ "number_cards": [],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,
- "quick_lists": [
-  {
-   "document_type": "Student Invoice",
-   "label": "Overdue Invoices",
-   "quick_list_filter": "[[\"Student Invoice\",\"status\",\"=\",\"Overdue\",false]]"
-  }
- ],
+ "quick_lists": [],
  "roles": [
   {
    "role": "Administrator"

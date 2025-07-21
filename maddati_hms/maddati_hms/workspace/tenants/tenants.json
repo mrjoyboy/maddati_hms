@@ -1,0 +1,60 @@
+{
+ "charts": [
+  {
+   "chart_name": "Tenant Admission",
+   "label": "Tenant Admission"
+  }
+ ],
+ "content": "[{\"id\":\"rOyUiplO4w\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Tenants</span>\",\"col\":12}},{\"id\":\"2kwEZ0igof\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Tenants\",\"col\":4}},{\"id\":\"82BF4OWCDe\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Active Tenants\",\"col\":4}},{\"id\":\"wHywIDK5rO\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"OhakB_2-lZ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"jKBNlC0VB1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Total Tenants\",\"col\":3}},{\"id\":\"F69XGiBa8d\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Add Tenant\",\"col\":3}},{\"id\":\"PGnGyolCtH\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"MinE1-tUrV\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Tenant Admission\",\"col\":12}}]",
+ "creation": "2025-07-21 08:49:00.384425",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "assign",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Tenants",
+ "links": [],
+ "modified": "2025-07-21 10:10:05.475294",
+ "modified_by": "Administrator",
+ "module": "Maddati Hms",
+ "name": "Tenants",
+ "number_cards": [
+  {
+   "label": "Total Tenants",
+   "number_card_name": "Total Tenants"
+  },
+  {
+   "label": "Total Active Tenants",
+   "number_card_name": "Total Active Tenants"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "Hostel",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 6.0,
+ "shortcuts": [
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Total Tenants",
+   "link_to": "Tenant",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "New",
+   "label": "Add Tenant",
+   "link_to": "Tenant",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Tenants"
+}
