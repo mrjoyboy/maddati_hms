@@ -23,7 +23,7 @@ frappe.ui.form.on("Room", {
     },
     branch(frm) {
         if (frm.doc.branch) {
-            frappe.db.get_value("Company", frm.doc.branch, "abbr", (r) => {
+            frappe.db.get_value("Branch", frm.doc.branch, "abbr", (r) => {
                 if (r && r.abbr) {
                     // Set room number prefix
                     frm.set_value("room_number", r.abbr + "-");

@@ -40,7 +40,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Branch",
-   "options": "Company"
+   "options": "Branch"
   },
   {
    "fieldname": "contact_number",
@@ -83,13 +83,13 @@
    "fieldname": "related_person_type",
    "fieldtype": "Select",
    "label": "Related Person Type",
-   "options": "Student\nStaff\nOther"
+   "options": "Tenant\nEmployee\nOther"
   },
   {
    "fieldname": "related_person",
    "fieldtype": "Dynamic Link",
    "in_list_view": 1,
-   "label": "Related Student / Staff",
+   "label": "Related Tenant / Employee",
    "options": "related_person_type"
   },
   {
@@ -101,7 +101,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-21 09:02:07.299918",
+ "modified": "2025-07-22 12:27:35.895752",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Visitor Log",
