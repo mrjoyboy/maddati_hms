@@ -24,7 +24,6 @@ class Tenant(Document):
                 "doctype": "Customer",
                 "customer_name": self.tenant_name or self.name,
                 "customer_type": "Individual",
-                "customer_group": "Hostel Tenants",
                 "territory": "All Territories",
                 "customer_email_address": self.email or "",
                 "custom_tenant": self.name,
