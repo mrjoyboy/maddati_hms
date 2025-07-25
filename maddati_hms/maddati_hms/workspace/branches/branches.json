@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"NZRi-SI_NP\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Branches\",\"col\":12}},{\"id\":\"_yfD5-aBKu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"WFHLFCJ-WO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Total Branches\",\"col\":3}},{\"id\":\"nBHVXRcZUH\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Create Branch\",\"col\":3}},{\"id\":\"APmI6pMyuL\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"wCIvJXR6ii\",\"type\":\"card\",\"data\":{\"card_name\":\"Try\",\"col\":4}}]",
+ "content": "[{\"id\":\"_yfD5-aBKu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"nxTmfH-Msm\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Branches\",\"col\":12}},{\"id\":\"APmI6pMyuL\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"6_FLUZ9bm_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Total Branches\",\"col\":3}},{\"id\":\"oI8RGobKCT\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Add New Branch\",\"col\":3}}]",
  "creation": "2025-07-21 08:35:07.527213",
  "custom_blocks": [],
  "docstatus": 0,
@@ -12,38 +12,8 @@
  "indicator_color": "green",
  "is_hidden": 0,
  "label": "Branches",
- "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Try",
-   "link_count": 2,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Branches",
-   "link_count": 0,
-   "link_to": "Company",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Tenant",
-   "link_count": 0,
-   "link_to": "Tenant",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  }
- ],
- "modified": "2025-07-21 10:04:26.671418",
+ "links": [],
+ "modified": "2025-07-25 14:41:41.432533",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Branches",
@@ -53,7 +23,7 @@
  "public": 1,
  "quick_lists": [
   {
-   "document_type": "Company",
+   "document_type": "Branch",
    "label": "Branches",
    "quick_list_filter": "[]"
   }
@@ -62,18 +32,18 @@
  "sequence_id": 4.0,
  "shortcuts": [
   {
-   "color": "Green",
+   "color": "Grey",
    "doc_view": "List",
    "label": "Total Branches",
-   "link_to": "Company",
+   "link_to": "Branch",
    "stats_filter": "[]",
    "type": "DocType"
   },
   {
-   "color": "Green",
+   "color": "Grey",
    "doc_view": "New",
-   "label": "Create Branch",
-   "link_to": "Company",
+   "label": "Add New Branch",
+   "link_to": "Branch",
    "stats_filter": "[]",
    "type": "DocType"
   }
