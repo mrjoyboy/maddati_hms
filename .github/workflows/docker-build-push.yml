@@ -26,7 +26,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ secrets.USERNAME}}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_TOKEN }}
 
       # - name: Download Containerfile from frappe repo
       #   run: |
@@ -48,5 +48,9 @@ jobs:
             --build-arg=APPS_JSON_BASE64=${{ env.APPS_JSON_BASE64 }} \
             --tag=ghcr.io/mrjoyboy/frappe-custom:hms \
             --file=images/layered/Containerfile .
-          
+
           docker push ghcr.io/mrjoyboy/frappe-custom:hms
+
+      # - name: Notify Watchtower to Update
+      #   run: |
+      #     curl -X POST "http://your-prod-server:8080/v1/update?token=${{ secrets.WATCHTOWER_TOKEN }}"
