@@ -1,0 +1,18 @@
+[
+  {
+    "url": "https://github.com/frappe/erpnext",
+    "branch": "version-15"
+  },
+  {
+    "url": "https://github.com/frappe/hrms",
+    "branch": "version-15"
+  },
+  {
+    "url": "https://github.com/yarsa/nepal-compliance",
+    "branch": "master"
+  },
+  {
+    "url": "https://github.com/mrjoyboy/maddati_hms.git",
+    "branch": "master"
+  }
+]
