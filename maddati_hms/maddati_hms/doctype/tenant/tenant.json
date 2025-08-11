@@ -3,7 +3,7 @@
  "allow_events_in_timeline": 1,
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "format:{tenant_name}-{####}",
+ "autoname": "format:{tenant_name} {####}",
  "creation": "2025-06-18 08:39:57.980713",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -36,8 +36,6 @@
   "security_deposit",
   "monthly_fee",
   "extra_services_fees",
-  "discount",
-  "last_invoice_date",
   "section_break_ypqd",
   "extra_services",
   "accommodation_history_tab",
@@ -87,10 +85,11 @@
    "label": "Address"
   },
   {
+   "default": "Active",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Active\nLeft\nCancelled"
+   "options": "Active\nLeft\nPending\nRejected"
   },
   {
    "fieldname": "guardian_information_section",
@@ -135,10 +134,10 @@
    "reqd": 1
   },
   {
+   "default": "Today",
    "fieldname": "admission_date",
    "fieldtype": "Date",
-   "label": "Admission Date",
-   "reqd": 1
+   "label": "Admission Date"
   },
   {
    "fieldname": "room",
@@ -163,18 +162,12 @@
   {
    "fieldname": "monthly_fee",
    "fieldtype": "Currency",
-   "label": "Monthly Fee",
-   "read_only": 1
+   "label": "Monthly Fee"
   },
   {
    "fieldname": "security_deposit",
    "fieldtype": "Currency",
    "label": "Security Deposit"
-  },
-  {
-   "fieldname": "discount",
-   "fieldtype": "Currency",
-   "label": "Discount"
   },
   {
    "fieldname": "extra_services_fees",
@@ -204,15 +197,8 @@
    "options": "Tenant Accommodation History"
   },
   {
-   "fieldname": "last_invoice_date",
-   "fieldtype": "Date",
-   "label": "Last Invoice Date",
-   "read_only": 1
-  },
-  {
    "fieldname": "customer",
    "fieldtype": "Link",
-   "hidden": 1,
    "label": "Customer",
    "options": "Customer"
   },
@@ -234,7 +220,7 @@
  "image_field": "photo",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-22 12:30:17.748981",
+ "modified": "2025-08-10 20:30:34.885428",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Tenant",

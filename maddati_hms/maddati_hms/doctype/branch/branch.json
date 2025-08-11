@@ -8,11 +8,10 @@
  "document_type": "Setup",
  "engine": "InnoDB",
  "field_order": [
+  "company",
   "branch_name",
   "abbr",
-  "default_currency",
-  "country",
-  "company"
+  "status"
  ],
  "fields": [
   {
@@ -32,31 +31,22 @@
    "reqd": 1
   },
   {
-   "fieldname": "default_currency",
-   "fieldtype": "Link",
-   "label": "Default Currency",
-   "options": "Currency",
-   "reqd": 1
-  },
-  {
-   "fieldname": "country",
-   "fieldtype": "Link",
-   "label": "Country",
-   "options": "Country",
-   "reqd": 1
-  },
-  {
    "fieldname": "company",
    "fieldtype": "Link",
-   "label": "Linked Company",
-   "options": "Company",
-   "read_only": 1
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nMaintenance\nClosed"
   }
  ],
  "icon": "fa fa-code-fork",
  "idx": 1,
  "links": [],
- "modified": "2025-07-22 12:23:19.981844",
+ "modified": "2025-08-07 14:30:28.168436",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Branch",
