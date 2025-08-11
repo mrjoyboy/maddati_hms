@@ -20,6 +20,8 @@
   "gender",
   "address",
   "status",
+  "documents_section",
+  "tenant_documents",
   "guardian_information_section",
   "guardian_photo",
   "guardian_name",
@@ -214,13 +216,24 @@
    "fieldname": "contact_number",
    "fieldtype": "Data",
    "label": "Contact Number"
+  },
+  {
+   "fieldname": "documents_section",
+   "fieldtype": "Section Break",
+   "label": "Documents"
+  },
+  {
+   "fieldname": "tenant_documents",
+   "fieldtype": "Table",
+   "label": "Tenant Documents",
+   "options": "Tenant Documents"
   }
  ],
  "grid_page_length": 50,
  "image_field": "photo",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-10 20:30:34.885428",
+ "modified": "2025-08-11 18:14:39.727165",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Tenant",
