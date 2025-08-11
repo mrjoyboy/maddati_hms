@@ -10,9 +10,13 @@
   "room_number",
   "room_type",
   "capacity",
-  "price",
   "occupied_beds",
+  "column_break_tgkb",
+  "monthly_rent",
+  "admission_fee",
+  "security_deposit",
   "status",
+  "section_break_nshh",
   "facilities"
  ],
  "fields": [
@@ -40,14 +44,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "price",
-   "fieldtype": "Currency",
-   "label": "Price",
-   "non_negative": 1,
-   "precision": "0",
-   "reqd": 1
-  },
-  {
    "fieldname": "capacity",
    "fieldtype": "Int",
    "label": "Capacity",
@@ -57,27 +53,52 @@
   {
    "fieldname": "occupied_beds",
    "fieldtype": "Int",
-   "label": "Occupied Beds",
-   "read_only": 1
+   "label": "Occupied Beds"
   },
   {
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Status",
-   "options": "Available\nFull\nMaintenance"
+   "options": "Available\nMaintenance\nFull"
   },
   {
    "fieldname": "facilities",
    "fieldtype": "Table",
    "label": "Facilities",
    "options": "Room Facility"
+  },
+  {
+   "fieldname": "column_break_tgkb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "admission_fee",
+   "fieldtype": "Currency",
+   "label": "Admission Fee"
+  },
+  {
+   "fieldname": "security_deposit",
+   "fieldtype": "Currency",
+   "label": "Security Deposit"
+  },
+  {
+   "fieldname": "section_break_nshh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "monthly_rent",
+   "fieldtype": "Currency",
+   "label": "Monthly Rent",
+   "non_negative": 1,
+   "precision": "0",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-22 12:26:49.205758",
+ "modified": "2025-08-09 23:41:03.933111",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Room",
@@ -114,5 +135,7 @@
  "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "room_number",
+ "show_title_field_in_link": 1
 }

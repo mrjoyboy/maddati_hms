@@ -27,7 +27,7 @@ fixtures = [
     {"dt": "Custom Field", "filters": [["name", "in", [
                 "Customer-custom_tenant",
                 "Customer-custom_company",
-                "Sales Invoice-custom_tenant",
+                "Customer-customer_email_address",
             ]]]},
     {"dt": "Email Template", "filters": [["name", "in", [
         "Tenant Welcome Email",
@@ -62,10 +62,13 @@ after_install = "maddati_hms.setup.enable_auto_repeat_for_sales_invoice"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Sales Invoice" : "public/js/sales_invoice.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+
+# include css in doctype views
+# doctype_css = {"Tenant" : "public/css/tenant_form.css"}
 
 # Svg Icons
 # ------------------
@@ -149,14 +152,6 @@ after_install = "maddati_hms.setup.enable_auto_repeat_for_sales_invoice"
 # Document Events
 # ---------------
 # Hook on document methods and events
-
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
 
 # Scheduled Tasks
 # ---------------

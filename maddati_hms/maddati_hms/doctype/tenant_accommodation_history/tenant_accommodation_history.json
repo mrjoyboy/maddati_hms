@@ -19,7 +19,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Branch",
-   "options": "Company",
+   "options": "Branch",
    "reqd": 1
   },
   {
@@ -44,7 +44,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Active\nLeft\nCancelled",
+   "options": "Pending\nActive\nLeft\nRejected",
    "reqd": 1
   },
   {
@@ -57,7 +57,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-07-15 17:20:04.938263",
+ "modified": "2025-08-09 20:36:18.747589",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Tenant Accommodation History",
