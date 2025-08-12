@@ -17,3 +17,11 @@ class Room(Document):
                 frappe.throw("Capacity must be at least 1 for Dormitory rooms.")
         else:
             frappe.throw("Invalid room type. Must be Single, Double, or Dormitory.")
+
+        # Set status to Full or Available based on occupancy, but preserve Maintenance
+        if self.status != "Maintenance":
+            if self.capacity is not None and self.occupied_beds is not None:
+                if int(self.occupied_beds) >= int(self.capacity):
+                    self.status = "Full"
+                else:
+                    self.status = "Available"

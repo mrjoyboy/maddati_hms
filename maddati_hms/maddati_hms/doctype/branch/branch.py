@@ -8,45 +8,38 @@ class Branch(Document):
         # Prevent duplicate Company Abbr
         if self.abbr and frappe.db.exists("Company", {"abbr": self.abbr, "name": ["!=", self.company]}):
             frappe.throw(f"A company with abbreviation '{self.abbr}' already exists.")
+        
+        # Update linked customers if company changes
+        if not self.is_new():
+            old_doc = frappe.get_doc(self.doctype, self.name)
+            if old_doc.company != self.company:
+                self._update_linked_customers(old_doc.company, self.company)
 
-    def after_insert(self):
-        # Prevent duplicate Company
-        if frappe.db.exists("Company", {"company_name": self.branch_name}):
-            company = frappe.get_doc("Company", {"company_name": self.branch_name})
-        else:
-            company = frappe.new_doc("Company")
-            company.company_name = self.branch_name
-            company.abbr = self.abbr
-            company.default_currency = self.default_currency
-            company.country = self.country
-            company.create_chart_of_accounts_based_on = "Standard"
-            company.insert()
-
-        # Link the company to this branch (assumes 'company' is a Link field in Branch)
-        self.db_set("company", company.name)
-
-    def on_update(self):
-        if self.company and frappe.db.exists("Company", self.company):
-            company = frappe.get_doc("Company", self.company)
-            updated = False
-
-            if company.company_name != self.branch_name:
-                company.company_name = self.branch_name
-                updated = True
-            if company.abbr != self.abbr:
-                company.abbr = self.abbr
-                updated = True
-            if company.default_currency != self.default_currency:
-                company.default_currency = self.default_currency
-                updated = True
-            if company.country != self.country:
-                company.country = self.country
-                updated = True
-
-            if updated:
-                company.save()
+    def _update_linked_customers(self, old_company, new_company):
+        """Update custom_company field for all customers linked to tenants in this branch"""
+        if not new_company:
+            return
+            
+        # Find all tenants in this branch
+        tenants = frappe.get_all('Tenant', 
+            filters={'branch': self.name, 'customer': ['is', 'set']},
+            fields=['customer']
+        )
+        
+        # Update customer custom_company field
+        for tenant in tenants:
+            if tenant.customer:
+                frappe.db.set_value('Customer', tenant.customer, 'custom_company', new_company)
 
     def on_trash(self):
         # Prevent deletion if linked Company exists
         if self.company and frappe.db.exists("Company", self.company):
             frappe.throw(_("Cannot delete Branch as linked Company '{0}' exists.").format(self.company))
+
+    def get_indicator(self):
+        color_map = {
+            "Active": "green",
+            "Maintenance": "yellow",
+            "Closed": "red"
+        }
+        return (self.status, color_map.get(self.status, "gray"), f"status,=,{self.status}")
