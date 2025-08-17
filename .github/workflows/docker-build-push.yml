@@ -60,3 +60,4 @@ jobs:
             docker compose -f ${{secrets.COMPOSE_FILE}} pull
             docker compose -f ${{secrets.COMPOSE_FILE}} down && docker compose -f ${{secrets.COMPOSE_FILE}} up -d
             docker compose -f ${{secrets.COMPOSE_FILE}} exec backend bench --site ${{secrets.SITE}} migrate
+            docker image prune
