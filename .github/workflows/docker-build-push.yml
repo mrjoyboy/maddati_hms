@@ -28,12 +28,6 @@ jobs:
           username: ${{ secrets.USERNAME}}
           password: ${{ secrets.GH_TOKEN }}
 
-      # - name: Download Containerfile from frappe repo
-      #   run: |
-      #     mkdir -p images/layered
-      #     curl -sL https://raw.githubusercontent.com/frappe/frappe/version-15/images/layered/Containerfile \
-      #       -o images/layered/Containerfile
-
       - name: Base64 encode app.json
         id: encode_apps_json
         run: |
@@ -51,6 +45,18 @@ jobs:
 
           docker push ghcr.io/mrjoyboy/frappe-custom:hms
 
-      # - name: Notify Watchtower to Update
-      #   run: |
-      #     curl -X POST "http://your-prod-server:8080/v1/update?token=${{ secrets.WATCHTOWER_TOKEN }}"
+  deploy:
+    name: Deploy to ec2
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Execute remote SSH commands using SSH key
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            docker compose -f ${{secrets.COMPOSE_FILE}} pull
+            docker compose -f ${{secrets.COMPOSE_FILE}} down && docker compose -f ${{secrets.COMPOSE_FILE}} up -d
+            docker compose -f ${{secrets.COMPOSE_FILE}} exec backend bench --site ${{secrets.SITE}} migrate
