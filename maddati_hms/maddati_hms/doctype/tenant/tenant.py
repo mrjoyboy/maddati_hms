@@ -39,10 +39,7 @@ class Tenant(Document):
                         self._add_accommodation_history_row(from_date=date.today(), to_date=date.today(), status=self.status, remarks=f"Status changed from {old_doc.status} to {self.status}")
                     # Decrement occupied_beds in old room
                     if old_doc.room:
-                        room_doc = frappe.get_doc("Room", old_doc.room)
-                        if room_doc.occupied_beds and room_doc.occupied_beds > 0:
-                            room_doc.occupied_beds -= 1
-                            room_doc.save(ignore_permissions=True)
+                        self._update_room_occupancy(old_doc.room, -1)
                 # Left/Cancelled -> Active: check if there's already an active entry, if not add new row
                 elif old_doc.status in ["Left", "Cancelled"] and self.status == "Active":
                     # Check if there's already an active entry
@@ -51,9 +48,7 @@ class Tenant(Document):
                         self._add_accommodation_history_row(from_date=date.today(), to_date=None, status=self.status, remarks=f"Status changed from {old_doc.status} to {self.status}")
                         # Increment occupied_beds in new room
                         if self.room:
-                            room_doc = frappe.get_doc("Room", self.room)
-                            room_doc.occupied_beds = (room_doc.occupied_beds or 0) + 1
-                            room_doc.save(ignore_permissions=True)
+                            self._update_room_occupancy(self.room, 1)
             # Branch/Room change logic
             elif branch_changed or room_changed:
                 # If status is Active, close previous active row with Left status and create new active row
@@ -69,8 +64,17 @@ class Tenant(Document):
                             break
                     if not updated:
                         self._add_accommodation_history_row(from_date=date.today(), to_date=date.today(), status="Left", remarks="Auto-closed due to branch/room change")
+                    
+                    # Decrement occupied_beds in old room
+                    if old_doc.room:
+                        self._update_room_occupancy(old_doc.room, -1)
+                    
                     # Create new active row for new branch/room
                     self._add_accommodation_history_row(from_date=date.today(), to_date=None, status="Active", remarks="Branch/Room changed while status Active")
+                    
+                    # Increment occupied_beds in new room
+                    if self.room:
+                        self._update_room_occupancy(self.room, 1)
                 # If status is Left/Cancelled, update last Left/Cancelled row
                 elif self.status in ["Left", "Cancelled"]:
                     updated = False
@@ -109,6 +113,9 @@ class Tenant(Document):
             # New tenant: create initial row if branch and room are set
             if self.branch and self.room:
                 self._add_accommodation_history_row(from_date=date.today(), to_date=None, status=self.status or "Active", remarks="Initial accommodation assignment")
+                # Increment occupied_beds for new active tenant
+                if (self.status or "").lower() == "active":
+                    self._update_room_occupancy(self.room, 1)
 
         self._validate_accommodation_history()
         
@@ -150,6 +157,36 @@ class Tenant(Document):
             frappe.throw(_("Cannot delete Tenant while status is Active. Set status to Left, then delete."))
         if self.customer:
             frappe.throw(_("Tenant linked to Customer cannot be deleted. Unlink the Customer first."))
+        
+        # Decrement occupied_beds if tenant was active
+        if (self.status or "").lower() == "active" and self.room:
+            self._update_room_occupancy(self.room, -1)
+
+    def _update_room_occupancy(self, room_name, change):
+        """Update room occupied_beds by the specified change amount"""
+        try:
+            if room_name:
+                room_doc = frappe.get_doc("Room", room_name)
+                current_occupied = room_doc.occupied_beds or 0
+                new_occupied = current_occupied + change
+                
+                # Ensure occupied_beds doesn't go below 0
+                if new_occupied < 0:
+                    new_occupied = 0
+                
+                # Ensure occupied_beds doesn't exceed capacity
+                if room_doc.capacity and new_occupied > room_doc.capacity:
+                    frappe.throw(_("Cannot assign tenant to room {0}. Room capacity is {1} but would have {2} occupied beds.").format(
+                        room_name, room_doc.capacity, new_occupied
+                    ))
+                
+                room_doc.occupied_beds = new_occupied
+                room_doc.save(ignore_permissions=True)
+                
+                frappe.msgprint(_(f"Room {room_name} occupancy updated: {current_occupied} → {new_occupied}"), indicator='blue')
+        except Exception as e:
+            frappe.log_error(f"Error updating room occupancy for {room_name}: {str(e)}", "Room Occupancy Update Failed")
+            raise e
 
     def _add_accommodation_history_row(self, from_date, to_date, status, remarks):
         self.append("accommodation_history", {
@@ -369,3 +406,144 @@ def create_single_invoice(tenant_name: str, item_code: str, amount: float, invoi
             'success': False,
             'message': f'Error creating {invoice_type} invoice: {str(e)}'
         }
+
+@frappe.whitelist()
+def recalculate_room_occupancy():
+    """Recalculate occupied_beds for all rooms based on active tenants"""
+    try:
+        # Get all rooms
+        rooms = frappe.get_all("Room", fields=["name", "room_number"])
+        
+        for room in rooms:
+            # Count active tenants in this room
+            active_tenants = frappe.db.count("Tenant", {
+                "room": room.name,
+                "status": "Active"
+            })
+            
+            # Update room occupancy
+            frappe.db.set_value("Room", room.name, "occupied_beds", active_tenants)
+        
+        frappe.msgprint(_("Room occupancy recalculated successfully for {0} rooms").format(len(rooms)), indicator='green')
+        return {"success": True, "message": f"Recalculated occupancy for {len(rooms)} rooms"}
+        
+    except Exception as e:
+        frappe.log_error(f"Error recalculating room occupancy: {str(e)}", "Room Occupancy Recalculation Failed")
+        return {"success": False, "message": f"Error: {str(e)}"}
+
+@frappe.whitelist()
+def get_room_occupancy_status(room_name):
+    """Get current occupancy status for a specific room"""
+    try:
+        room_doc = frappe.get_doc("Room", room_name)
+        active_tenants = frappe.get_all("Tenant", {
+            "room": room_name,
+            "status": "Active"
+        }, fields=["name", "tenant_name"])
+        
+        return {
+            "room_name": room_name,
+            "room_number": room_doc.room_number,
+            "capacity": room_doc.capacity,
+            "occupied_beds": room_doc.occupied_beds,
+            "status": room_doc.status,
+            "active_tenants": active_tenants,
+            "available_beds": room_doc.capacity - room_doc.occupied_beds if room_doc.capacity and room_doc.occupied_beds else room_doc.capacity
+        }
+        
+    except Exception as e:
+        frappe.log_error(f"Error getting room occupancy status for {room_name}: {str(e)}", "Room Occupancy Status Failed")
+        return {"error": str(e)}
+
+@frappe.whitelist()
+def fix_room_occupancy_inconsistencies():
+    """Fix any inconsistencies in room occupancy data"""
+    try:
+        # Get all rooms
+        rooms = frappe.get_all("Room", fields=["name", "room_number", "occupied_beds"])
+        
+        fixed_count = 0
+        total_rooms = len(rooms)
+        
+        for room in rooms:
+            # Count actual active tenants in this room
+            actual_active_tenants = frappe.db.count("Tenant", {
+                "room": room.name,
+                "status": "Active"
+            })
+            
+            # If there's a mismatch, fix it
+            if room.occupied_beds != actual_active_tenants:
+                frappe.db.set_value("Room", room.name, "occupied_beds", actual_active_tenants)
+                fixed_count += 1
+                
+                # Log the fix
+                frappe.logger().info(f"Fixed room {room.room_number}: occupied_beds changed from {room.occupied_beds} to {actual_active_tenants}")
+        
+        message = f"Fixed occupancy inconsistencies in {fixed_count} out of {total_rooms} rooms"
+        frappe.msgprint(_(message), indicator='green' if fixed_count == 0 else 'yellow')
+        
+        return {
+            "success": True, 
+            "message": message,
+            "fixed_count": fixed_count,
+            "total_rooms": total_rooms
+        }
+        
+    except Exception as e:
+        frappe.log_error(f"Error fixing room occupancy inconsistencies: {str(e)}", "Room Occupancy Fix Failed")
+        return {"success": False, "message": f"Error: {str(e)}"}
+
+@frappe.whitelist()
+def get_occupancy_report():
+    """Get a detailed report of room occupancy"""
+    try:
+        # Get all rooms with their occupancy details
+        rooms = frappe.get_all("Room", fields=["name", "room_number", "capacity", "occupied_beds", "status"])
+        
+        report_data = []
+        total_capacity = 0
+        total_occupied = 0
+        
+        for room in rooms:
+            # Get active tenants in this room
+            active_tenants = frappe.get_all("Tenant", {
+                "room": room.name,
+                "status": "Active"
+            }, fields=["name", "tenant_name"])
+            
+            actual_occupied = len(active_tenants)
+            available = room.capacity - actual_occupied if room.capacity else 0
+            
+            # Check for inconsistencies
+            inconsistency = room.occupied_beds != actual_occupied
+            
+            report_data.append({
+                "room_number": room.room_number,
+                "capacity": room.capacity,
+                "occupied_beds_field": room.occupied_beds,
+                "actual_active_tenants": actual_occupied,
+                "available": available,
+                "status": room.status,
+                "inconsistency": inconsistency,
+                "tenants": [f"{t.tenant_name} ({t.name})" for t in active_tenants]
+            })
+            
+            total_capacity += room.capacity or 0
+            total_occupied += actual_occupied
+        
+        return {
+            "success": True,
+            "report_data": report_data,
+            "summary": {
+                "total_rooms": len(rooms),
+                "total_capacity": total_capacity,
+                "total_occupied": total_occupied,
+                "total_available": total_capacity - total_occupied,
+                "inconsistencies": len([r for r in report_data if r["inconsistency"]])
+            }
+        }
+        
+    except Exception as e:
+        frappe.log_error(f"Error generating occupancy report: {str(e)}", "Occupancy Report Failed")
+        return {"success": False, "message": f"Error: {str(e)}"}

@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "Branches",
  "links": [],
- "modified": "2025-07-25 14:41:41.432533",
+ "modified": "2025-08-17 17:34:57.261330",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Branches",
@@ -29,7 +29,7 @@
   }
  ],
  "roles": [],
- "sequence_id": 4.0,
+ "sequence_id": 8.0,
  "shortcuts": [
   {
    "color": "Grey",

@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "Hostel",
  "links": [],
- "modified": "2025-07-21 10:09:45.868390",
+ "modified": "2025-08-17 17:34:57.117320",
  "modified_by": "Administrator",
  "module": "Maddati Hms",
  "name": "Hostel",
@@ -30,7 +30,7 @@
    "role": "Hostel Admin"
   }
  ],
- "sequence_id": 3.0,
+ "sequence_id": 7.0,
  "shortcuts": [],
  "title": "Hostel"
 }

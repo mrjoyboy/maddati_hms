@@ -122,15 +122,35 @@ frappe.ui.form.on('Tenant', {
 
   room(frm) {
     if (frm.doc.room) {
-      frappe.db.get_value('Room', frm.doc.room, ['monthly_rent', 'admission_fee', 'security_deposit'], (r) => {
+      frappe.db.get_value('Room', frm.doc.room, ['monthly_rent', 'admission_fee', 'security_deposit', 'capacity', 'occupied_beds', 'status'], (r) => {
         frm.set_value('monthly_fee', r.monthly_rent || 0);
         frm.set_value('admission_fee', r.admission_fee || 0);
         frm.set_value('security_deposit', r.security_deposit || 0);
+        
+        // Check if room is full and show warning
+        if (r.capacity && r.occupied_beds !== undefined) {
+          const available = r.capacity - r.occupied_beds;
+          if (available <= 0 && frm.doc.status === 'Active') {
+            frappe.show_alert(__('Warning: This room is full. Cannot assign active tenant to a full room.'), 'red');
+            frm.set_value('room', '');
+          }
+        }
       });
     } else {
       frm.set_value('monthly_fee', 0);
       frm.set_value('admission_fee', 0);
       frm.set_value('security_deposit', 0);
+    }
+  },
+
+  status(frm) {
+    // Show warning if changing from Active to other status
+    if (frm.doc.status && frm.doc.status !== 'Active' && frm.doc.room) {
+      frappe.db.get_value('Room', frm.doc.room, ['occupied_beds'], (r) => {
+        if (r.occupied_beds > 0) {
+          frappe.show_alert(__('Note: Changing status from Active will decrease room occupancy by 1'), 'yellow');
+        }
+      });
     }
   }
 });
