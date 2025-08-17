@@ -34,7 +34,6 @@ fixtures = [
         "Tenant Welcome Email",
         "Tenant Update Email",
         "Tenant Left Email",
-        "Auto Repeat Sales Invoice Email"
     ]]]}
 ]
 
