@@ -28,6 +28,7 @@ fixtures = [
                 "Customer-custom_tenant",
                 "Customer-custom_company",
                 "Customer-customer_email_address",
+                
             ]]]},
     {"dt": "Email Template", "filters": [["name", "in", [
         "Tenant Welcome Email",

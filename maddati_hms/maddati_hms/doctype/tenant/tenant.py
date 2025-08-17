@@ -96,6 +96,8 @@ class Tenant(Document):
                         result = create_or_link_customer(self.name)
                         if result and isinstance(result, dict) and result.get("customer"):
                             self.customer = result["customer"]
+                            # Update the customer field in the database
+                            self.db_set("customer", self.customer)
                     if self.customer:
                         frappe.db.set_value('Customer', self.customer, 'disabled', 0)
                 else:
@@ -269,3 +271,101 @@ def unlink_customer(tenant: str):
     
     frappe.msgprint(_('Customer "{0}" unlinked and disabled successfully').format(customer_name), indicator='green')
     return { 'success': True, 'customer': customer_name }
+
+@frappe.whitelist()
+def create_single_invoice(tenant_name: str, item_code: str, amount: float, invoice_type: str):
+    """
+    Create a single Sales Invoice for a specific item type
+    """
+    try:
+        tenant_doc = frappe.get_doc('Tenant', tenant_name)
+        
+        if not tenant_doc.customer:
+            return {
+                'success': False,
+                'message': f'No customer linked to tenant {tenant_name}. Cannot create invoice.'
+            }
+            
+        if not tenant_doc.branch:
+            return {
+                'success': False,
+                'message': f'No branch assigned to tenant {tenant_name}. Cannot create invoice.'
+            }
+            
+        # Get company from branch
+        company = frappe.db.get_value('Branch', tenant_doc.branch, 'company')
+        if not company:
+            return {
+                'success': False,
+                'message': f'No company assigned to branch {tenant_doc.branch}. Cannot create invoice.'
+            }
+            
+        # Get default receivable account for the company
+        receivable_account = frappe.db.get_value('Company', company, 'default_receivable_account')
+        if not receivable_account:
+            return {
+                'success': False,
+                'message': f'No default receivable account set for company {company}. Cannot create invoice.'
+            }
+            
+        # Get default income account for the company
+        income_account = frappe.db.get_value('Company', company, 'default_income_account')
+        if not income_account:
+            return {
+                'success': False,
+                'message': f'No default income account set for company {company}. Cannot create invoice.'
+            }
+            
+        # Get customer name
+        customer_name = frappe.db.get_value('Customer', tenant_doc.customer, 'customer_name')
+        
+        # Get cost center from company
+        cost_center = frappe.db.get_value('Company', company, 'cost_center')
+        
+        # Create description based on invoice type
+        if invoice_type == 'Monthly Fee':
+            description = f'Monthly fee for tenant {tenant_doc.name} - {tenant_doc.tenant_name} ({frappe.utils.formatdate(frappe.utils.today(), "MMMM YYYY")})'
+        else:
+            description = f'{invoice_type.lower()} for tenant {tenant_doc.name} - {tenant_doc.tenant_name}'
+        
+        # Create Sales Invoice
+        invoice = frappe.get_doc({
+            'doctype': 'Sales Invoice',
+            'customer': tenant_doc.customer,
+            'customer_name': customer_name,
+            'company': company,
+            'posting_date': frappe.utils.today(),
+            'due_date': frappe.utils.add_days(frappe.utils.today(), 7),  # Due in 7 days
+            'debit_to': receivable_account,
+            'items': [{
+                'item_code': item_code,
+                'item_name': item_code,
+                'description': description,
+                'qty': 1,
+                'rate': amount,
+                'amount': amount,
+                'income_account': income_account,
+                'cost_center': cost_center,
+                'item_group': 'Services'
+            }],
+            'custom_tenant': tenant_doc.name,
+            'custom_branch': tenant_doc.branch,
+            'custom_room': tenant_doc.room,
+            'custom_invoice_type': invoice_type
+        })
+        
+        invoice.insert(ignore_permissions=True)
+        invoice.submit()
+        
+        return {
+            'success': True,
+            'invoice_name': invoice.name,
+            'message': f'{invoice_type} Invoice created successfully: {invoice.name} for amount {frappe.format(amount, "Currency")}'
+        }
+        
+    except Exception as e:
+        frappe.log_error(f'Error creating {invoice_type} invoice for tenant {tenant_name}: {str(e)}', f'{invoice_type} Invoice Creation Failed')
+        return {
+            'success': False,
+            'message': f'Error creating {invoice_type} invoice: {str(e)}'
+        }

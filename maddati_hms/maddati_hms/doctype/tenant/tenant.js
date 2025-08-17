@@ -66,6 +66,30 @@ frappe.ui.form.on('Tenant', {
         );
       }, __('Actions'));
     }
+
+    // Invoice Creation Buttons (only show if customer is linked and tenant is active)
+    if (frm.doc.customer && frm.doc.status === 'Active') {
+      // Create Admission Fee Invoice
+      if (frm.doc.admission_fee && frm.doc.admission_fee > 0) {
+        frm.add_custom_button(__('Create Admission Fee Invoice'), () => {
+          create_tenant_invoice(frm, 'Tenant Admission Fee', frm.doc.admission_fee, 'Admission Fee');
+        }, __('Create Invoice'));
+      }
+
+      // Create Security Deposit Invoice
+      if (frm.doc.security_deposit && frm.doc.security_deposit > 0) {
+        frm.add_custom_button(__('Create Security Deposit Invoice'), () => {
+          create_tenant_invoice(frm, 'Tenant Security Deposit', frm.doc.security_deposit, 'Security Deposit');
+        }, __('Create Invoice'));
+      }
+
+      // Create Monthly Fee Invoice
+      if (frm.doc.monthly_fee && frm.doc.monthly_fee > 0) {
+        frm.add_custom_button(__('Create Monthly Fee Invoice'), () => {
+          create_tenant_invoice(frm, 'Tenant Monthly Fee', frm.doc.monthly_fee, 'Monthly Fee');
+        }, __('Create Invoice'));
+      }
+    }
   },
 
   onload(frm) {
@@ -145,5 +169,42 @@ function calculate_extra_services_fees(frm) {
     total += flt(row.amount);
   });
   frm.set_value('extra_services_fees', total);
+}
+
+function create_tenant_invoice(frm, item_code, amount, invoice_type) {
+  if (!frm.doc.customer) {
+    frappe.show_alert(__('Customer must be linked to create invoices.'), 'red');
+    return;
+  }
+
+  if (!frm.doc.branch) {
+    frappe.show_alert(__('Branch must be selected to create invoices.'), 'red');
+    return;
+  }
+
+  frappe.call({
+    method: 'maddati_hms.maddati_hms.doctype.tenant.tenant.create_single_invoice',
+    args: {
+      tenant_name: frm.doc.name,
+      item_code: item_code,
+      amount: amount,
+      invoice_type: invoice_type
+    },
+    freeze: true,
+    freeze_message: __('Creating {0} Invoice...', [invoice_type]),
+    callback: (r) => {
+      if (r.exc) {
+        frappe.show_alert(__('Error creating invoice: {0}', [r.exc]), 'red');
+      } else if (r.message && r.message.success) {
+        frappe.show_alert(__('{0} Invoice created successfully: {1}', [invoice_type, r.message.invoice_name]), 'green');
+        // Optionally open the created invoice
+        if (r.message.invoice_name) {
+          frappe.set_route('Form', 'Sales Invoice', r.message.invoice_name);
+        }
+      } else {
+        frappe.show_alert(__('Error creating invoice. Please check the console for details.'), 'red');
+      }
+    }
+  });
 }
 

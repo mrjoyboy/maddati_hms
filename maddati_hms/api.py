@@ -45,4 +45,5 @@ def get_customer_company(customer):
     
     # If still no company found, return the default company
     default_company = frappe.db.get_value('Global Defaults', None, 'default_company')
-    return default_company 
+    return default_company
+
